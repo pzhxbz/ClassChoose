@@ -97,9 +97,9 @@ namespace ClassChoose
         {
             JObject getInfo = new JObject();
             getInfo.Add(new JProperty("token", token));
-            //var retInfo = HttpGet("http://localhost:3000/api/user_info/" + username, getInfo.ToString());
-            var retInfo =
-                "{ \"code\": 0, \"msg\": \"成功\", \"info\": {  \"lesson_list\": [\"janus\", \"has\", \"a\", \"big\", \"dick\"]}}";
+            var retInfo = HttpGet("http://localhost:3000/api/user_info/" + username, getInfo.ToString());
+            //var retInfo =
+            //    "{ \"code\": 0, \"msg\": \"成功\", \"info\": {  \"lesson_list\": [\"janus\", \"has\", \"a\", \"big\", \"dick\"]}}";
             if (retInfo.Length == 0)
             {
                 return null;

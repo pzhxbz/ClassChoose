@@ -50,16 +50,21 @@ namespace ClassChoose
 
             var chooseId = client.GetChoosedClass(Token, UserName);
 
-            foreach (var id in chooseId)
+            if (chooseId != null)
             {
-                classInfo.SetIsChoose(id, true);
-                var lesson = classInfo.GetClassInfo(id);
-                if (lesson == null)
+                foreach (var id in chooseId)
                 {
-                    return;
+                    classInfo.SetIsChoose(id, true);
+                    var lesson = classInfo.GetClassInfo(id);
+                    if (lesson == null)
+                    {
+                        return;
+                    }
+                    choosedClass.Lesson.Add(lesson);
                 }
-                choosedClass.Lesson.Add(lesson);
             }
+
+
 
             if (classInfo.Lesson == null)
             {
