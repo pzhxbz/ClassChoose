@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -19,7 +20,12 @@ namespace ClassChoose
 
         public UserRetInfo RegisterUser(JObject json)
         {
-            String retInfo = HttpPost("http://localhost:3000/api/register", json.ToString());
+            var nvc = new Dictionary<String, String>();
+            foreach (var body in json)
+            {
+                nvc.Add(body.Key, body.Value.ToString());
+            }
+            String retInfo = Post("http://localhost:3000/api/register", nvc);
             if (retInfo.Length == 0)
             {
                 return null;
@@ -34,7 +40,20 @@ namespace ClassChoose
 
         public UserRetInfo Login(JObject json)
         {
-            String retInfo = HttpPost("http://localhost:3000/api/login", json.ToString());
+            var nvc = new Dictionary<String, String>();
+            foreach (var body in json)
+            {
+                nvc.Add(body.Key, body.Value.ToString());
+            }
+            //var content = new FormUrlEncodedContent(nvc);
+            //String retInfo = HttpPost("http://localhost:3000/api/login", content.ToString());
+            /* var client = new HttpClient();
+             var req = new HttpRequestMessage(HttpMethod.Post, "http://localhost:3000/api/login") { Content = new FormUrlEncodedContent(nvc) };
+             var ret = client.SendAsync(req);
+             var retInfo = ret.ToString();*/
+            //var content = new FormUrlEncodedContent(nvc);
+            var retInfo = Post("http://localhost:3000/api/login", nvc);
+
             if (retInfo.Length == 0)
             {
                 return null;
@@ -80,7 +99,12 @@ namespace ClassChoose
             postInfo.Add(new JProperty("username", username));
             postInfo.Add(new JProperty("token", token));
             postInfo.Add(new JProperty("lesson_id", ClassNum));
-            String retInfo = HttpPost("http://localhost:3000/api/select_lesson", postInfo.ToString());
+            var nvc = new Dictionary<String, String>();
+            foreach (var body in postInfo)
+            {
+                nvc.Add(body.Key, body.Value.ToString());
+            }
+            String retInfo = Post("http://localhost:3000/api/select_lesson", nvc);
             if (retInfo.Length == 0)
             {
                 return null;
@@ -97,7 +121,12 @@ namespace ClassChoose
         {
             JObject getInfo = new JObject();
             getInfo.Add(new JProperty("token", token));
-            var retInfo = HttpGet("http://localhost:3000/api/user_info/" + username, getInfo.ToString());
+            var nvc = new Dictionary<String, String>();
+            foreach (var body in getInfo)
+            {
+                nvc.Add(body.Key, body.Value.ToString());
+            }
+            var retInfo = Get("http://localhost:3000/api/user_info/" + username, nvc);
             //var retInfo =
             //    "{ \"code\": 0, \"msg\": \"成功\", \"info\": {  \"lesson_list\": [\"janus\", \"has\", \"a\", \"big\", \"dick\"]}}";
             if (retInfo.Length == 0)
@@ -125,7 +154,12 @@ namespace ClassChoose
             postInfo.Add(new JProperty("username", username));
             postInfo.Add(new JProperty("lesson_id", id));
             postInfo.Add(new JProperty("token", token));
-            var retInfo = HttpPost("http://localhost:3000/api/cancel_lesson", postInfo.ToString());
+            var nvc = new Dictionary<String, String>();
+            foreach (var body in postInfo)
+            {
+                nvc.Add(body.Key, body.Value.ToString());
+            }
+            var retInfo = Post("http://localhost:3000/api/cancel_lesson", nvc);
             if (retInfo.Length == 0)
             {
                 return null;
@@ -147,7 +181,9 @@ namespace ClassChoose
                 //创建post请求
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "POST";
-                request.ContentType = "application/json;charset=UTF-8";
+                //request.ContentType = "application/json;charset=UTF-8";
+                request.ContentType = "application/x-www-form-urlencoded";
+                //request.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
                 byte[] payload = Encoding.UTF8.GetBytes(data);
                 request.ContentLength = payload.Length;
 
@@ -181,7 +217,9 @@ namespace ClassChoose
                 url = url + (data == "" ? "" : "?") + data;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "GET";
-                request.ContentType = "text/html;charset=UTF-8";
+                //request.ContentType = "text/html;charset=UTF-8";
+                request.ContentType = "application/x-www-form-urlencoded";
+                //request.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
                 //接受返回来的数据
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -199,6 +237,74 @@ namespace ClassChoose
             {
                 return "";
             }
+        }
+        public String Post(string url, Dictionary<string, string> dic)
+        {
+            string result = "";
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            req.Method = "POST";
+            req.ContentType = "application/x-www-form-urlencoded";
+            #region 添加Post 参数  
+            StringBuilder builder = new StringBuilder();
+            int i = 0;
+            foreach (var item in dic)
+            {
+                if (i > 0)
+                    builder.Append("&");
+                builder.AppendFormat("{0}={1}", item.Key, item.Value);
+                i++;
+            }
+            byte[] data = Encoding.UTF8.GetBytes(builder.ToString());
+            req.ContentLength = data.Length;
+            using (Stream reqStream = req.GetRequestStream())
+            {
+                reqStream.Write(data, 0, data.Length);
+                reqStream.Close();
+            }
+            #endregion
+            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+            Stream stream = resp.GetResponseStream();
+            //获取响应内容  
+            using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+            {
+                result = reader.ReadToEnd();
+            }
+            return result;
+        }
+        public String Get(string url, Dictionary<string, string> dic)
+        {
+            string result = "";
+            StringBuilder builder = new StringBuilder();
+            builder.Append(url);
+            if (dic.Count > 0)
+            {
+                builder.Append("?");
+                int i = 0;
+                foreach (var item in dic)
+                {
+                    if (i > 0)
+                        builder.Append("&");
+                    builder.AppendFormat("{0}={1}", item.Key, item.Value);
+                    i++;
+                }
+            }
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(builder.ToString());
+            //添加参数  
+            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+            Stream stream = resp.GetResponseStream();
+            try
+            {
+                //获取内容  
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    result = reader.ReadToEnd();
+                }
+            }
+            finally
+            {
+                stream.Close();
+            }
+            return result;
         }
     }
 

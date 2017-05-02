@@ -32,7 +32,7 @@ namespace ClassChoose
                 login.ShowDialog();
             }
 
-            if (login.LoginSuccess)
+            if (!login.LoginSuccess)
             {
                 this.Close();
                 return;

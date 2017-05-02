@@ -45,6 +45,8 @@ namespace ClassChoose
                 this.Token = retInfo.token;
                 IsQuit = true;
                 this.Close();
+                return;
+
             }
             LoginSuccess = false;
             MessageBox.Show("用户名或密码错误！", "登陆失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
