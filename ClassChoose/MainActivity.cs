@@ -60,8 +60,15 @@ namespace ClassChoose
                     {
                         return;
                     }
-                    choosedClass.Lesson.Add(lesson);
+
+
+                    choosedClass.Lesson.Add(lesson.Copy());
                 }
+                ChoosedLesson.BeginUpdate();
+
+                choosedClass.SetListView(ChoosedLesson);
+
+                ChoosedLesson.EndUpdate();
             }
 
 
@@ -86,6 +93,7 @@ namespace ClassChoose
             this.ClassChosser.Items.Add(lesson);*/
 
             this.ClassChosser.EndUpdate();
+
 
 
 
@@ -115,7 +123,7 @@ namespace ClassChoose
                 {
                     return;
                 }
-                choosedClass.Lesson.Add(lesson);
+                choosedClass.Lesson.Add(lesson.Copy());
             }
 
             ClassChosser.BeginUpdate();
@@ -220,6 +228,17 @@ namespace ClassChoose
         public override string ToString()
         {
             return TeacherName + "-" + ClassName;
+        }
+
+        public ClassInfo Copy()
+        {
+            var result = new ClassInfo();
+            result.ClassNumber = this.ClassNumber;
+            result.ClassName = this.ClassName;
+            result.RemainingNum = this.RemainingNum;
+            result.TeacherName = this.TeacherName;
+            result.TotolNum = this.TotolNum;
+            return result;
         }
     }
 
