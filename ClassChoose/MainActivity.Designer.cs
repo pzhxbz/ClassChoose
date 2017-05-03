@@ -39,6 +39,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.GetInfo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ClassChosser
@@ -51,11 +52,11 @@
             this.ClassChosser.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ClassChosser.LabelWrap = false;
             this.ClassChosser.Location = new System.Drawing.Point(0, 0);
-            this.ClassChosser.Margin = new System.Windows.Forms.Padding(2);
+            this.ClassChosser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ClassChosser.MultiSelect = false;
             this.ClassChosser.Name = "ClassChosser";
             this.ClassChosser.RightToLeftLayout = true;
-            this.ClassChosser.Size = new System.Drawing.Size(417, 575);
+            this.ClassChosser.Size = new System.Drawing.Size(555, 718);
             this.ClassChosser.TabIndex = 0;
             this.ClassChosser.UseCompatibleStateImageBehavior = false;
             this.ClassChosser.View = System.Windows.Forms.View.Details;
@@ -85,10 +86,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(866, 7);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(1155, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 16);
+            this.label1.Size = new System.Drawing.Size(89, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "已选课程";
             // 
@@ -101,10 +101,11 @@
             this.columnHeader4});
             this.ChoosedLesson.FullRowSelect = true;
             this.ChoosedLesson.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.ChoosedLesson.Location = new System.Drawing.Point(792, 34);
+            this.ChoosedLesson.Location = new System.Drawing.Point(1056, 42);
+            this.ChoosedLesson.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ChoosedLesson.MultiSelect = false;
             this.ChoosedLesson.Name = "ChoosedLesson";
-            this.ChoosedLesson.Size = new System.Drawing.Size(220, 541);
+            this.ChoosedLesson.Size = new System.Drawing.Size(292, 675);
             this.ChoosedLesson.TabIndex = 2;
             this.ChoosedLesson.UseCompatibleStateImageBehavior = false;
             this.ChoosedLesson.View = System.Windows.Forms.View.Details;
@@ -126,16 +127,28 @@
             // 
             this.columnHeader4.Text = "人数";
             // 
+            // GetInfo
+            // 
+            this.GetInfo.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.GetInfo.Location = new System.Drawing.Point(888, 634);
+            this.GetInfo.Name = "GetInfo";
+            this.GetInfo.Size = new System.Drawing.Size(138, 66);
+            this.GetInfo.TabIndex = 3;
+            this.GetInfo.Text = "数据库状态";
+            this.GetInfo.UseVisualStyleBackColor = false;
+            this.GetInfo.Click += new System.EventHandler(this.GetInfo_Click);
+            // 
             // MainActivity
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1011, 577);
+            this.ClientSize = new System.Drawing.Size(1348, 721);
+            this.Controls.Add(this.GetInfo);
             this.Controls.Add(this.ChoosedLesson);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ClassChosser);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainActivity";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "选课";
@@ -158,6 +171,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Button GetInfo;
     }
 }
 

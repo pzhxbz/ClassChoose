@@ -209,6 +209,12 @@ namespace ClassChoose
                 }
             }
         }
+
+        private void GetInfo_Click(object sender, EventArgs e)
+        {
+            var window = new DBInfo();
+            window.ShowDialog();
+        }
     }
 
     public class ClassInfo
