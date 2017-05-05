@@ -174,6 +174,21 @@ namespace ClassChoose
 
         }
 
+        public List<String> GetDBinfo()
+        {
+
+            //todo : 解析数据
+            var retInfo = HttpGet("http://localhost:3000/api/system_count", "");
+            JObject retJson = JObject.Parse(retInfo);
+            var result = new List<String>();
+            int userCount = (int)retJson["user_conut"];
+            int rqCount = (int)retJson["request_count"];
+            result.Add(Convert.ToString(rqCount));
+            result.Add(Convert.ToString(userCount));
+
+            return result;
+        }
+
         public string HttpPost(string url, string data)
         {
             try

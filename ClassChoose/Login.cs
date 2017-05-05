@@ -25,10 +25,20 @@ namespace ClassChoose
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            this.LoginButton.Text = "Logining";
+            //this.LoginButton.Text = "Logining";
             JObject jo = new JObject();
             String user = this.UserText.Text;
             String pwd = this.PwdText.Text;
+            if (user.Length == 0)
+            {
+                MessageBox.Show("请填写用户名", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (pwd.Length == 0)
+            {
+                MessageBox.Show("请填写密码", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             jo.Add(new JProperty("username", user));
             jo.Add(new JProperty("password", pwd));
             var client = new Client();
@@ -50,7 +60,7 @@ namespace ClassChoose
             }
             LoginSuccess = false;
             MessageBox.Show("用户名或密码错误！", "登陆失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            this.LoginButton.Text = "Login";
+            //this.LoginButton.Text = "Login";
             IsQuit = false;
             //var form = new MainActivity();
             //form.Show(null);

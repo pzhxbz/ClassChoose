@@ -215,6 +215,11 @@ namespace ClassChoose
             var window = new DBInfo();
             window.ShowDialog();
         }
+
+        private void Refresh_Click(object sender, EventArgs e)
+        {
+            this.UpdateInfo();
+        }
     }
 
     public class ClassInfo

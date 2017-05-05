@@ -40,6 +40,7 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.GetInfo = new System.Windows.Forms.Button();
+            this.Refresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ClassChosser
@@ -102,7 +103,7 @@
             this.ChoosedLesson.FullRowSelect = true;
             this.ChoosedLesson.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ChoosedLesson.Location = new System.Drawing.Point(1056, 42);
-            this.ChoosedLesson.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ChoosedLesson.Margin = new System.Windows.Forms.Padding(4);
             this.ChoosedLesson.MultiSelect = false;
             this.ChoosedLesson.Name = "ChoosedLesson";
             this.ChoosedLesson.Size = new System.Drawing.Size(292, 675);
@@ -138,11 +139,23 @@
             this.GetInfo.UseVisualStyleBackColor = false;
             this.GetInfo.Click += new System.EventHandler(this.GetInfo_Click);
             // 
+            // Refresh
+            // 
+            this.Refresh.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Refresh.Location = new System.Drawing.Point(627, 634);
+            this.Refresh.Name = "Refresh";
+            this.Refresh.Size = new System.Drawing.Size(138, 66);
+            this.Refresh.TabIndex = 4;
+            this.Refresh.Text = "刷新";
+            this.Refresh.UseVisualStyleBackColor = false;
+            this.Refresh.Click += new System.EventHandler(this.Refresh_Click);
+            // 
             // MainActivity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1348, 721);
+            this.Controls.Add(this.Refresh);
             this.Controls.Add(this.GetInfo);
             this.Controls.Add(this.ChoosedLesson);
             this.Controls.Add(this.label1);
@@ -172,6 +185,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Button GetInfo;
+        private System.Windows.Forms.Button Refresh;
     }
 }
 
