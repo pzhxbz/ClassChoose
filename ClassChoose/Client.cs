@@ -177,7 +177,6 @@ namespace ClassChoose
         public List<String> GetDBinfo()
         {
 
-            //todo : 解析数据
             var retInfo = HttpGet("http://localhost:3000/api/system_count", "");
             JObject retJson = JObject.Parse(retInfo);
             var result = new List<String>();
