@@ -60,10 +60,8 @@ namespace ClassChoose
             }
             LoginSuccess = false;
             MessageBox.Show("用户名或密码错误！", "登陆失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //this.LoginButton.Text = "Login";
             IsQuit = false;
-            //var form = new MainActivity();
-            //form.Show(null);
+
         }
 
         private void Login_Load(object sender, EventArgs e)

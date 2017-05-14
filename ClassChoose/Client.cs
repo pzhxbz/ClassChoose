@@ -45,13 +45,6 @@ namespace ClassChoose
             {
                 nvc.Add(body.Key, body.Value.ToString());
             }
-            //var content = new FormUrlEncodedContent(nvc);
-            //String retInfo = HttpPost("http://localhost:3000/api/login", content.ToString());
-            /* var client = new HttpClient();
-             var req = new HttpRequestMessage(HttpMethod.Post, "http://localhost:3000/api/login") { Content = new FormUrlEncodedContent(nvc) };
-             var ret = client.SendAsync(req);
-             var retInfo = ret.ToString();*/
-            //var content = new FormUrlEncodedContent(nvc);
             var retInfo = Post("http://localhost:3000/api/login", nvc);
 
             if (retInfo.Length == 0)
@@ -127,8 +120,6 @@ namespace ClassChoose
                 nvc.Add(body.Key, body.Value.ToString());
             }
             var retInfo = Get("http://localhost:3000/api/user_info/" + username, nvc);
-            //var retInfo =
-            //    "{ \"code\": 0, \"msg\": \"成功\", \"info\": {  \"lesson_list\": [\"janus\", \"has\", \"a\", \"big\", \"dick\"]}}";
             if (retInfo.Length == 0)
             {
                 return null;
